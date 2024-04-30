@@ -6,7 +6,7 @@
 /*   By: letsaguiar <letsaguiar@yandex.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 10:00:44 by letsaguiar        #+#    #+#             */
-/*   Updated: 2024/04/30 10:11:59 by letsaguiar       ###   ########.fr       */
+/*   Updated: 2024/04/30 10:16:48 by letsaguiar       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char    *read_from_file(int fd)
     char    *buffer;
     size_t   bytes_read;
 
-    buffer = malloc((BUFFER_SIZE + 1) * sizeof (char));
+    buffer = ft_calloc(BUFFER_SIZE + 1, sizeof (char));
     bytes_read = read(fd, buffer, BUFFER_SIZE);
     if (bytes_read <= 0)
     {
