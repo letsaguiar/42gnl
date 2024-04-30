@@ -6,7 +6,7 @@
 /*   By: letsaguiar <letsaguiar@yandex.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 10:01:40 by letsaguiar        #+#    #+#             */
-/*   Updated: 2024/04/30 10:16:30 by letsaguiar       ###   ########.fr       */
+/*   Updated: 2024/04/30 10:39:42 by letsaguiar       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,11 @@
 char    *get_next_line(int fd);
 
 void    *ft_calloc(size_t count, size_t size);
+
+char    *ft_strchr(const char *s, char c);
+
+size_t  ft_strlen(const char *s);
+
+char    *ft_strjoin(const char *s1, const char *s2);
 
 #endif
