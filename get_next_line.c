@@ -6,7 +6,7 @@
 /*   By: letsaguiar <letsaguiar@yandex.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 10:00:44 by letsaguiar        #+#    #+#             */
-/*   Updated: 2024/04/30 11:02:05 by letsaguiar       ###   ########.fr       */
+/*   Updated: 2024/04/30 11:47:43 by letsaguiar       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char    *read_from_file(int fd)
     char    *buffer;
     size_t   bytes_read;
 
-    buffer = ft_calloc(BUFFER_SIZE + 1, sizeof (char));
+    buffer = (char *) ft_calloc(BUFFER_SIZE + 1, sizeof (char));
     bytes_read = read(fd, buffer, BUFFER_SIZE);
     if (bytes_read <= 0)
     {
@@ -40,20 +40,41 @@ char    *append_to_left(char *left, char *buffer)
     return (ptr);
 }
 
+char    *remove_from_left(char *left)
+{
+    char    *ptr;
+    char    *chr;
+
+    chr = ft_strchr(left, '\n');
+    if (!chr)
+        ptr = NULL;
+    else
+        ptr = ft_substr(chr + 1, 0, ft_strlen(chr + 1));
+    free(left);
+    return (ptr);
+}
+
+char    *extract_line(const char *left)
+{
+    size_t  length;
+
+    if (!left)
+        return (NULL);
+    length = 0;
+    while (left[length] && left[length] != '\n')
+        length++;
+    return (ft_substr(left, 0, length + 1));
+}
+
 char    *get_next_line(int fd)
 {
     char        *buffer;
-    char        *left;
+    char        *line;
+    static char *left;
     
-    left = NULL;
-    while (1)
-    {
-        buffer = read_from_file(fd);
-        if (!buffer)
-            break;
+    while (!ft_strchr(left, '\n') && (buffer = read_from_file(fd)))
         left = append_to_left(left, buffer);
-        if (ft_strchr(left, '\n'))
-            break;
-    }
-    return (left);
+    line = extract_line(left);
+    left = remove_from_left(left);
+    return (line);
 }
