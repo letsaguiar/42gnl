@@ -6,7 +6,7 @@
 /*   By: letsaguiar <letsaguiar@yandex.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 10:00:44 by letsaguiar        #+#    #+#             */
-/*   Updated: 2024/04/30 11:47:43 by letsaguiar       ###   ########.fr       */
+/*   Updated: 2024/04/30 12:14:05 by letsaguiar       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char    *read_from_file(int fd)
     char    *buffer;
     size_t   bytes_read;
 
+    if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+        return (NULL);
     buffer = (char *) ft_calloc(BUFFER_SIZE + 1, sizeof (char));
     bytes_read = read(fd, buffer, BUFFER_SIZE);
     if (bytes_read <= 0)
